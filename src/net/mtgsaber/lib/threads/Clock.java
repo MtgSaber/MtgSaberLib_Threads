@@ -3,6 +3,23 @@ package net.mtgsaber.lib.threads;
 import java.util.LinkedList;
 import java.util.Vector;
 
+/**
+ * @author MtgSaber
+ * @version 0.0.1
+ *
+ * Cycles once per specified wait time, iterating over an internal collection of <interface>Tickable</interface>s.
+ * <interface>Tickable</interface>s can be added via a buffer. They will be added on the next input buffer check step.
+ * <interface>Tickable</interface>s are removed in the same manner. The clock will continue running until
+ * <method>stop()</method> is called, and <field>running</field> is flipped to false.
+ *
+ * Each cycle consists of a Tick step, an input step, and an output step.
+ * The steps operate as follows:
+ *      - Tick:   Each element is ticked.
+ *      - Input:  All elements of the add buffer are synchronously added to the internal collection,
+ *                then the buffer is flushed.
+ *      - Output: All elements of the remove buffer are synchronously removed from the internal collection,
+ *                then the buffer is flushed.
+ */
 public class Clock implements Runnable {
     private final LinkedList<Tickable> ITEMS;
     private final Vector<Tickable> TO_ADD, TO_REM;
