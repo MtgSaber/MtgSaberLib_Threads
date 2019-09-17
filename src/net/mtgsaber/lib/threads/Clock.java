@@ -47,7 +47,7 @@ public class Clock implements Runnable {
             if (running) {
                 final long procTime = System.currentTimeMillis();
                 if (procTime > startTime + WAIT)
-                    System.err.println("[WARNING]: Clock running " + (procTime-startTime-WAIT) + "ms behind!");
+                    System.err.println("[WARNING]: Clock running " + (procTime-startTime- WAIT) + "ms behind!");
                 while (System.currentTimeMillis() < startTime + WAIT && running) {
                     try {
                         Thread.sleep(1);

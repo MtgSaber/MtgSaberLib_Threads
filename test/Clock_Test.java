@@ -11,13 +11,17 @@ public class Clock_Test {
     private static void test1() {
         System.out.println("---- BEGIN TEST 1 ----");
         final long start = System.currentTimeMillis();
+
         Tickable tck1 = () -> System.out.println("[" + (System.currentTimeMillis()-start) + "ms]: Foo");
         Tickable tck2 = () -> System.out.println("[" + (System.currentTimeMillis()-start) + "ms]: Bar");
+
         Clock clk1 = new Clock(250, tck1);
         Clock clk2 = new Clock(500, tck2);
+
         Thread clk1Thread = new Thread(clk1);
         Thread clk2Thread = new Thread(clk2);
         clk1Thread.start();
+
         try {
             Thread.sleep(125);
         } catch (InterruptedException ex) {
